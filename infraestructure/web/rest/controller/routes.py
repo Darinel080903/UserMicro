@@ -41,3 +41,8 @@ def delete_user(user_id: str):
 def login_user(email: str, password: str):
     user = service.login(email, password)
     return user
+
+
+@controller.get(default_route + "/health")
+def health():
+    return {"status": "Ok"}
