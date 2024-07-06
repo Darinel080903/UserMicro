@@ -6,8 +6,10 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /code
 
 COPY environment.yml .
-RUN conda env create -f environment.yml -p /opt/conda/envs/users \
-conda config --add channels conda-forge
+
+RUN conda config --add channels conda-forge
+
+RUN conda env create -f environment.yml -p /opt/conda/envs/users
 
 SHELL ["conda", "run", "-n", "users", "/bin/bash", "-c"]
 
