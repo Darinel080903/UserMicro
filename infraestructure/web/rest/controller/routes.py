@@ -3,13 +3,14 @@ from application.service.user_service import User_service
 from domain.model.dto.response.base_response import Base_response
 from infraestructure.repository import user_repository_impl
 from infraestructure.mappers.user_mapper_service import UserMapperService
+from infraestructure.web.request.login_entity_request import Login_entity_request
 from infraestructure.web.request.user_entity_request import User_entity_request
 
 controller = APIRouter()
 repository = user_repository_impl.User_repository_impl()
 service = User_service(repository)
 
-default_route = '/api/v1/users'
+default_route = '/users/api/v1'
 
 
 @controller.get(default_route + "/")
@@ -38,11 +39,11 @@ def delete_user(user_id: str):
 
 
 @controller.post(default_route + "/login")
-def login_user(email: str, password: str):
-    user = service.login(email, password)
+def login_user(login: Login_entity_request):
+    user = service.login(login.email, login.password)
     return user
 
 
-@controller.get(default_route + "/health")
+@controller.get("/health")
 def health():
     return {"status": "Ok"}

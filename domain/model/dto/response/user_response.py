@@ -1,7 +1,9 @@
 class User_response:
-    def __init__(self, uuid: str, name: str, lastname: str, email: str):
+    def __init__(self, uuid: str, name: str, lastname: str, phone_number: str, profile: str, email: str):
         self.uuid = uuid
         self.name = name
+        self.phone_number = phone_number
+        self.profile = profile
         self.lastname = lastname
         self.email = email
 
@@ -16,6 +18,18 @@ class User_response:
 
     def get_email(self):
         return self.email
+
+    def get_phone_number(self):
+        return self.phone_number
+
+    def get_profile(self):
+        return self.profile
+
+    def set_profile(self, profile):
+        self.profile = profile
+
+    def set_phone_number(self, phone_number):
+        self.phone_number = phone_number
 
     def set_name(self, name):
         self.name = name

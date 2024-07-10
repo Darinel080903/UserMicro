@@ -29,3 +29,7 @@ class User_repository(ABC):
     @abstractmethod
     def get_by_email(self, email: str) -> User_domain:
         raise NotImplemented
+
+    @abstractmethod
+    def post_image(self, local_file, bucket, s3_file) -> str:
+        raise NotImplemented

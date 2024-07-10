@@ -10,6 +10,8 @@ class UserMapperService:
         return User_domain(
             name=user.name,
             lastname=user.lastname,
+            phone_number=user.phone_number,
+            profile=user.profile,
             email=user.email,
             password=user.password
         )
@@ -19,6 +21,8 @@ class UserMapperService:
         return User_response(
             uuid=user.uuid,
             name=user.name,
+            phone_number=user.phone_number,
+            profile=user.profile,
             lastname=user.lastname,
             email=user.email,
         )
@@ -29,6 +33,8 @@ class UserMapperService:
             uuid=user.uuid,
             name=user.name,
             lastname=user.lastname,
+            phone_number=user.phone_number,
+            profile=user.profile,
             email=user.email,
             password=user.password
         )
@@ -39,6 +45,8 @@ class UserMapperService:
             uuid=user.uuid,
             name=user.name,
             lastname=user.lastname,
+            phone_number=user.phone_number,
+            profile=user.profile,
             email=user.email,
         )
 
@@ -47,6 +55,8 @@ class UserMapperService:
         return User_domain(
             name=user.name,
             lastname=user.lastname,
+            phone_number=user.phone_number,
+            profile=user.profile,
             email=user.email,
             password=user.password
         )

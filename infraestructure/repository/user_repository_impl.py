@@ -7,6 +7,8 @@ from domain.repository.user_repository import User_repository
 from infraestructure.configuration.db import SessionLocal
 from infraestructure.mappers.user_mapper_service import UserMapperService
 from infraestructure.schema.models_factory import Users
+import boto3
+from botocore.exceptions import NoCredentialsError
 
 
 class User_repository_impl(User_repository, ABC):
@@ -47,3 +49,24 @@ class User_repository_impl(User_repository, ABC):
 
     def get_by_email(self, email: str) -> User_domain:
         return self.db.query(Users).filter(Users.email == email).first()
+
+    def post_image(self, local_file, bucket, s3_file) -> str:
+        s3 = boto3.client('s3')
+
+        try:
+            s3.upload_file(local_file, bucket, s3_file, ExtraArgs={'ContentType': "image/jpeg"})
+            print("Upload Successful")
+            url = s3.generate_presigned_url(
+                ClientMethod='get_object',
+                Params={
+                    'Bucket': bucket,
+                    'Key': s3_file
+                }
+            )
+            return url
+        except FileNotFoundError:
+            print("The file was not found")
+            return 'error'
+        except NoCredentialsError:
+            print("Credentials not available")
+            return 'error'

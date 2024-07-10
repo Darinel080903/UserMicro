@@ -6,6 +6,7 @@ from domain.model.user_domain import User_domain
 from domain.repository.user_repository import User_repository
 from domain.use_case.user_use_case import User_use_case
 import bcrypt
+import base64
 
 
 class User_service(User_use_case, ABC):
@@ -26,8 +27,11 @@ class User_service(User_use_case, ABC):
                 raise Exception('Password must have at least 8 characters')
             hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
             user.password = hashed_password
+            self.base64_to_file(user.profile, 'output.jpg')
+            user.profile = self.user_repository.post_image('output.jpg', 'profileusersestablishment', 'output.jpg')
             user = self.user_repository.add_user(user)
             response = Base_response(data=user, message='User created', code=201)
+
         except Exception as e:
             response = Base_response(data=None, message=str(e), code=500)
         return response.to_dict()
@@ -64,3 +68,10 @@ class User_service(User_use_case, ABC):
         except Exception as e:
             response = Base_response(data=None, message=str(e), code=500)
         return response.to_dict()
+
+    @staticmethod
+    def base64_to_file(base64_string, output_file):
+        with open(output_file, 'wb') as file:
+            file.write(base64.b64decode(base64_string))
+
+
