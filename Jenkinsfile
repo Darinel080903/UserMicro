@@ -5,11 +5,11 @@ pipeline{
         PORT_MAPPING = '8000:8000'
         CONTAINER_NAME = 'service-user-container'
         AWS_REGION = 'us-east-1'
-        AWS_ACCESS_KEY_ID = "${env.AWS_ACCESS_KEY_ID}"
-        AWS_SECRET_ACCESS_KEY = "${env.AWS_SECRET_ACCESS_KEY}"
-        URR = "${env.URR}"
-        USS = "${env.USS}"
-        PSS = "${env.PSS}"
+        AWS_ACCESS_KEY_ID = env.AWS_ACCESS_KEY_ID
+        AWS_SECRET_ACCESS_KEY = env.AWS_SECRET_ACCESS_KEY
+        URR = env.URR
+        USS = env.USS
+        PSS = env.PSS
     }
 
     stages {
