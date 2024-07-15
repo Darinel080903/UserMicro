@@ -32,7 +32,7 @@ pipeline{
                         -e AWS_REGION=${env.AWS_REGION} \
                         -e URI=${env.URI} \
                         -e USS=${env.USS} \
-                        -e PSS=${env.PSS} \x
+                        -e PSS=${env.PSS} \
                         -p 8000:8000")
                 }
             }
