@@ -28,8 +28,8 @@ pipeline{
         stage('Build and Deploy') {
             steps {
                 script {
-                    docker.build(DOCKER_IMAGE)
-                    docker.run('service-user', "-e AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID} \
+                    def dockerImage = docker.build(DOCKER_IMAGE)
+                    dockerImage.run("-e AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID} \
                         -e AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY} \
                         -e AWS_REGION=${env.AWS_REGION} \
                         -e URR=${env.URR} \
