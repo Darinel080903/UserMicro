@@ -35,7 +35,7 @@ pipeline{
                         -e URR=${env.URR} \
                         -e USS=${env.USS} \
                         -e PSS=${env.PSS} \
-                        -p 8000:8000")
+                        -p 8000:8000", "--name ${CONTAINER_NAME}")
                 }
             }
         }
