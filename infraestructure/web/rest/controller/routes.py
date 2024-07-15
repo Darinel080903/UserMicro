@@ -11,7 +11,7 @@ controller = APIRouter()
 repository = user_repository_impl.User_repository_impl()
 service = User_service(repository)
 
-default_route = '/users/api/v1'
+default_route = '/api/v1'
 
 
 @controller.get(default_route + "/")
@@ -50,6 +50,6 @@ def login_user(login: Login_entity_request):
     return user
 
 
-@controller.get("/health")
+@controller.get(default_route+"/health")
 def health():
     return {"status": "Ok"}
