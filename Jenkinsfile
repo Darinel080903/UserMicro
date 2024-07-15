@@ -32,7 +32,7 @@ pipeline{
                     docker.run(env.SERVICE_NAME, "-e AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID} \
                         -e AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY} \
                         -e AWS_REGION=${env.AWS_REGION} \
-                        -e URI=${env.URR} \
+                        -e URR=${env.URR} \
                         -e USS=${env.USS} \
                         -e PSS=${env.PSS} \
                         -p 8000:8000")
