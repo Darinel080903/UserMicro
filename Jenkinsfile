@@ -16,9 +16,11 @@ pipeline{
         stage('Stop Container and Remove') {
             steps {
                 script {
-                    sh "docker stop ${CONTAINER_NAME}"
-
-                    sh "docker rm ${CONTAINER_NAME}"
+                    def containerExists = sh(script: "docker ps -a --filter name=^/${CONTAINER_NAME}\$ --format '{{.Names}}'", returnStdout: true).trim()
+                    if (containerExists == CONTAINER_NAME) {
+                        sh "docker stop ${CONTAINER_NAME}"
+                        sh "docker rm ${CONTAINER_NAME}"
+                    }
                 }
             }
         }
