@@ -11,7 +11,6 @@ class UserMapperService:
             name=user.name,
             lastname=user.lastname,
             phone_number=user.phone_number,
-            profile=user.profile,
             email=user.email,
             password=user.password
         )
@@ -34,7 +33,6 @@ class UserMapperService:
             name=user.name,
             lastname=user.lastname,
             phone_number=user.phone_number,
-            profile=user.profile,
             email=user.email,
             password=user.password
         )
@@ -45,8 +43,8 @@ class UserMapperService:
             uuid=user.uuid,
             name=user.name,
             lastname=user.lastname,
-            phone_number=user.phone_number,
             profile=user.profile,
+            phone_number=user.phone_number,
             email=user.email,
         )
 
@@ -56,7 +54,6 @@ class UserMapperService:
             name=user.name,
             lastname=user.lastname,
             phone_number=user.phone_number,
-            profile=user.profile,
             email=user.email,
             password=user.password
         )

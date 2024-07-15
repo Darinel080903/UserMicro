@@ -35,3 +35,7 @@ class User_use_case(ABC):
     @abstractmethod
     def login(self, email: str, password: str) -> Base_response:
         raise NotImplemented
+
+    @abstractmethod
+    def upload_image(self, content: bytes, filename: str, uuid: str) -> Base_response:
+        raise NotImplemented

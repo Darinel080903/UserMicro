@@ -5,6 +5,7 @@ from infraestructure.repository import user_repository_impl
 from infraestructure.mappers.user_mapper_service import UserMapperService
 from infraestructure.web.request.login_entity_request import Login_entity_request
 from infraestructure.web.request.user_entity_request import User_entity_request
+from fastapi import UploadFile
 
 controller = APIRouter()
 repository = user_repository_impl.User_repository_impl()
@@ -24,6 +25,11 @@ def create_user(user: User_entity_request):
     user = UserMapperService.to_request_domain(user)
     user_save = service.add_user(user)
     return user_save
+
+
+@controller.post(default_route + "/add/image/{user_id}")
+def post_image(user_id: str, file: UploadFile):
+    return service.upload_image(file.file.read(), file.filename, user_id)
 
 
 @controller.put(default_route + "/update/{user_id}")

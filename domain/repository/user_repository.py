@@ -31,5 +31,9 @@ class User_repository(ABC):
         raise NotImplemented
 
     @abstractmethod
-    def post_image(self, local_file, bucket, s3_file) -> str:
+    def post_image(self,  content: bytes, filename: str, bucket: str, s3_filename: str) -> str:
+        raise NotImplemented
+
+    @abstractmethod
+    def create_image_for_user(self, user_id: str, url: str):
         raise NotImplemented

@@ -9,7 +9,7 @@ class Users(Base):
     name = Column(String(255))
     lastname = Column(String(255))
     phone_number = Column(String(255))
-    profile = Column(String(255))
+    profile = Column(String(255), nullable=True)
     email = Column(String(255), unique=True)
     password = Column(String(255))
 

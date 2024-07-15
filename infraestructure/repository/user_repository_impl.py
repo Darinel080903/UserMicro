@@ -50,23 +50,16 @@ class User_repository_impl(User_repository, ABC):
     def get_by_email(self, email: str) -> User_domain:
         return self.db.query(Users).filter(Users.email == email).first()
 
-    def post_image(self, local_file, bucket, s3_file) -> str:
+    def post_image(self, content: bytes, filename: str, bucket: str, s3_filename: str):
         s3 = boto3.client('s3')
+        file_extension = filename.rsplit('.', 1)[1].lower()
+        content_type = 'image/jpeg' if file_extension in ['jpg', 'jpeg'] else 'image/png'
+        s3.put_object(Bucket=bucket, Key=s3_filename, Body=content, ACL='public-read', ContentType=content_type)
+        return f"https://{bucket}.s3.amazonaws.com/{s3_filename}"
 
-        try:
-            s3.upload_file(local_file, bucket, s3_file, ExtraArgs={'ContentType': "image/jpeg"})
-            print("Upload Successful")
-            url = s3.generate_presigned_url(
-                ClientMethod='get_object',
-                Params={
-                    'Bucket': bucket,
-                    'Key': s3_file
-                }
-            )
-            return url
-        except FileNotFoundError:
-            print("The file was not found")
-            return 'error'
-        except NoCredentialsError:
-            print("Credentials not available")
-            return 'error'
+    def create_image_for_user(self, user_id: str, url: str):
+        user = self.db.query(Users).filter(Users.uuid == user_id).first()
+        user.profile = url
+        self.db.commit()
+        self.db.refresh(user)
+        self.db.close()
