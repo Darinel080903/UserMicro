@@ -28,7 +28,7 @@ class User_service(User_use_case, ABC):
             hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
             user.password = hashed_password
             user = self.user_repository.add_user(user)
-            response = Base_response(data=user, message='User created', code=201)
+            response = Base_response(data=user, message='Success', code=201)
         except Exception as e:
             response = Base_response(data=None, message=str(e), code=500)
         return response.to_dict()
@@ -38,7 +38,7 @@ class User_service(User_use_case, ABC):
             hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
             user.password = hashed_password
             user = self.user_repository.update_user(user, user_id)
-            response = Base_response(data=user, message='User updated', code=200)
+            response = Base_response(data=user, message='Success', code=200)
         except Exception as e:
             response = Base_response(data=None, message=str(e), code=500)
         return response.to_dict()
@@ -46,7 +46,7 @@ class User_service(User_use_case, ABC):
     def delete_user(self, user_id: str):
         try:
             self.user_repository.delete_user(user_id)
-            response = Base_response(data=None, message='User deleted', code=200)
+            response = Base_response(data=None, message='Success', code=200)
         except Exception as e:
             response = Base_response(data=None, message=str(e), code=500)
         return response.to_dict()
@@ -59,7 +59,7 @@ class User_service(User_use_case, ABC):
             user = self.user_repository.get_by_email(email)
             if user and bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
                 user = User_response(uuid=user.uuid, name=user.name, lastname=user.lastname, email=user.email, phone_number=user.phone_number)
-                response = Base_response(data=user, message='User found', code=200)
+                response = Base_response(data=user, message='Success', code=200)
             else:
                 response = Base_response(data=None, message='User not found', code=404)
         except Exception as e:
@@ -76,7 +76,7 @@ class User_service(User_use_case, ABC):
             url = self.user_repository.post_image(content, filename, 'profileusersestablishment', filename)
             print("waos",url)
             self.user_repository.create_image_for_user(uuid, url)
-            response = Base_response(data=None, message='Image uploaded', code=201)
+            response = Base_response(data=None, message='Success', code=201)
             return response.to_dict()
         except Exception as e:
             response = Base_response(data=None, message=str(e), code=500)
