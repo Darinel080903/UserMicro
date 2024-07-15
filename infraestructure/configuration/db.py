@@ -6,7 +6,7 @@ import os
 
 load_dotenv()
 
-connection = os.getenv('URI')
+connection = os.getenv('URR')
 user = os.getenv('USS')
 password = os.getenv('PSS')
 
