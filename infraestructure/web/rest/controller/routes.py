@@ -4,6 +4,7 @@ from domain.model.dto.response.base_response import Base_response
 from infraestructure.repository import user_repository_impl
 from infraestructure.mappers.user_mapper_service import UserMapperService
 from infraestructure.web.request.login_entity_request import Login_entity_request
+from infraestructure.web.request.update_user import UpdateUser
 from infraestructure.web.request.user_entity_request import User_entity_request
 from fastapi import UploadFile
 
@@ -33,8 +34,8 @@ def post_image(user_id: str, file: UploadFile):
 
 
 @controller.put(default_route + "/update/{user_id}")
-def update_user(user_id: str, user: User_entity_request):
-    user = UserMapperService.to_request_domain(user)
+def update_user(user_id: str, user: UpdateUser):
+    user = UserMapperService.to_update_request_domain(user)
     user_save = service.update_user(user, user_id)
     return user_save
 

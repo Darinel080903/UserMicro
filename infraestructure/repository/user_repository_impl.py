@@ -40,8 +40,7 @@ class User_repository_impl(User_repository, ABC):
         user_db = self.db.query(Users).filter(Users.uuid == user_id).first()
         user_db.name = user.name
         user_db.lastname = user.lastname
-        user_db.email = user.email
-        user_db.password = user.password
+        user_db.phone_number = user.phone_number
         self.db.commit()
         self.db.refresh(user_db)
         self.db.close()

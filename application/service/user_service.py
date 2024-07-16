@@ -35,8 +35,6 @@ class User_service(User_use_case, ABC):
 
     def update_user(self, user: User_domain, user_id: str) -> Base_response:
         try:
-            hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
-            user.password = hashed_password
             user = self.user_repository.update_user(user, user_id)
             response = Base_response(data=user, message='Success', code=200)
         except Exception as e:

@@ -2,6 +2,7 @@ from domain.model.dto.response.user_response import User_response
 from domain.model.user_domain import User_domain
 from infraestructure.schema.models_factory import Users
 from infraestructure.web.request.user_entity_request import User_entity_request
+from infraestructure.web.request.update_user import UpdateUser
 
 
 class UserMapperService:
@@ -56,4 +57,14 @@ class UserMapperService:
             phone_number=user.phone_number,
             email=user.email,
             password=user.password
+        )
+
+    @staticmethod
+    def to_update_request_domain(user: UpdateUser) -> User_domain:
+        return User_domain(
+            name=user.name,
+            lastname=user.lastname,
+            phone_number=user.phone_number,
+            email='',
+            password=''
         )
