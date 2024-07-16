@@ -58,7 +58,8 @@ class User_service(User_use_case, ABC):
         try:
             user = self.user_repository.get_by_email(email)
             if user and bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
-                user = User_response(uuid=user.uuid, name=user.name, lastname=user.lastname, email=user.email, phone_number=user.phone_number)
+                print(user.profile)
+                user = User_response(uuid=user.uuid, name=user.name, lastname=user.lastname, email=user.email, phone_number=user.phone_number, profile=user.profile)
                 response = Base_response(data=user, message='Success', code=200)
             else:
                 response = Base_response(data=None, message='User not found', code=404)
