@@ -27,8 +27,8 @@ class User_repository_impl(User_repository, ABC):
         users = self.db.query(Users).all()
         return [UserMapperService.to_entity_db(user) for user in users]
 
-    def get_by_id(self, user_id: str) -> User_response:
-        return self.db.query(Users).filter(Users.uuid == user_id).first()
+    def get_by_email(self, user_email: str) -> User_response:
+        return self.db.query(Users).filter(Users.email == user_email).first()
 
     def delete_user(self, user_id: str):
         user = self.db.query(Users).filter(Users.uuid == user_id).first()

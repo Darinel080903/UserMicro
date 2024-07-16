@@ -23,11 +23,7 @@ class User_repository(ABC):
         raise NotImplemented
 
     @abstractmethod
-    def get_by_id(self, user_id: str) -> User_response:
-        raise NotImplemented
-
-    @abstractmethod
-    def get_by_email(self, email: str) -> User_domain:
+    def get_by_email(self, user_id: str) -> User_response:
         raise NotImplemented
 
     @abstractmethod

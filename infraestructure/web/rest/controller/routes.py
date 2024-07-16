@@ -33,6 +33,11 @@ def post_image(user_id: str, file: UploadFile):
     return service.upload_image(file.file.read(), file.filename, user_id)
 
 
+@controller.get(default_route + "/find/{user_email}")
+def get_user(user_email: str):
+    return service.get_by_email(user_email)
+
+
 @controller.put(default_route + "/update/{user_id}")
 def update_user(user_id: str, user: UpdateUser):
     user = UserMapperService.to_update_request_domain(user)
@@ -51,6 +56,6 @@ def login_user(login: Login_entity_request):
     return user
 
 
-@controller.get(default_route+"/health")
+@controller.get(default_route + "/health")
 def health():
     return {"status": "Ok"}

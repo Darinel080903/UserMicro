@@ -29,7 +29,7 @@ class User_use_case(ABC):
         raise NotImplemented
 
     @abstractmethod
-    def get_by_id(self, user_id: str) -> User_response:
+    def get_by_email(self, user_id: str) -> Base_response:
         raise NotImplemented
 
     @abstractmethod

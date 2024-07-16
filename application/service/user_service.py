@@ -49,8 +49,13 @@ class User_service(User_use_case, ABC):
             response = Base_response(data=None, message=str(e), code=500)
         return response.to_dict()
 
-    def get_by_id(self, user_id: str) -> User_response:
-        return self.user_repository.get_by_id(user_id)
+    def get_by_email(self, user_email: str) -> Base_response:
+        try:
+            user = self.user_repository.get_by_email(user_email)
+            response = Base_response(data=user, message='Success', code=200)
+        except Exception as e:
+            response = Base_response(data=None, message=str(e), code=500)
+        return response.to_dict()
 
     def login(self, email: str, password: str) -> Base_response:
         try:
