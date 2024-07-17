@@ -25,10 +25,13 @@ class User_repository_impl(User_repository, ABC):
 
     def get_all(self) -> List[User_response]:
         users = self.db.query(Users).all()
+        self.db.close()
         return [UserMapperService.to_entity_db(user) for user in users]
 
     def get_by_email(self, user_email: str) -> User_response:
-        return self.db.query(Users).filter(Users.email == user_email).first()
+        user = self.db.query(Users).filter(Users.email == user_email).first()
+        self.db.close()
+        return user
 
     def delete_user(self, user_id: str):
         user = self.db.query(Users).filter(Users.uuid == user_id).first()
@@ -45,9 +48,6 @@ class User_repository_impl(User_repository, ABC):
         self.db.refresh(user_db)
         self.db.close()
         return UserMapperService.to_entity_db(user_db)
-
-    def get_by_email(self, email: str) -> User_domain:
-        return self.db.query(Users).filter(Users.email == email).first()
 
     def post_image(self, content: bytes, filename: str, bucket: str, s3_filename: str):
         s3 = boto3.client('s3')
