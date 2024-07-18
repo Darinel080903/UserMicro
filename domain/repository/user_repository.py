@@ -33,3 +33,7 @@ class User_repository(ABC):
     @abstractmethod
     def create_image_for_user(self, user_id: str, url: str):
         raise NotImplemented
+
+    @abstractmethod
+    def get_by_email_login(self, email: str):
+        raise NotImplemented

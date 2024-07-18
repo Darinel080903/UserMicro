@@ -60,3 +60,6 @@ class User_repository_impl(User_repository, ABC):
         self.db.commit()
         self.db.refresh(user)
         self.db.close()
+
+    def get_by_email_login(self, email: str):
+        return self.db.query(Users).filter(Users.email == email).first()

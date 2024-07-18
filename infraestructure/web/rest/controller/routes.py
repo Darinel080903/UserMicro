@@ -1,4 +1,6 @@
 from fastapi import APIRouter
+
+from application.service.auth_service import Auth_service
 from application.service.user_service import User_service
 from domain.model.dto.response.base_response import Base_response
 from infraestructure.repository import user_repository_impl
@@ -11,6 +13,7 @@ from fastapi import UploadFile
 controller = APIRouter()
 repository = user_repository_impl.User_repository_impl()
 service = User_service(repository)
+service_auth = Auth_service(repository)
 
 default_route = '/api/v1'
 
@@ -34,7 +37,7 @@ def post_image(user_id: str, file: UploadFile):
 
 
 @controller.get(default_route + "/find/{user_email}")
-def get_user(user_email: str):
+def get_user_email(user_email: str):
     return service.get_by_email(user_email)
 
 
@@ -52,7 +55,7 @@ def delete_user(user_id: str):
 
 @controller.post(default_route + "/login")
 def login_user(login: Login_entity_request):
-    user = service.login(login.email, login.password)
+    user = service_auth.login(login.email, login.password)
     return user
 
 
