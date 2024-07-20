@@ -25,14 +25,16 @@ class Auth_service(Auth_use_case, ABC):
 
     @staticmethod
     def jwt_validate(token: str):
-        pass
+        payload = jwt.decode(token, 'asicuuibryayuoinrinqr3298470947yriueyruiqmeiurynqewirye8qw764893481yimumyrqrq',
+                             algorithms=['HS256'])
+        return payload
 
     def login(self, email: str, password: str) -> Base_response:
         try:
             user = self.user_repository.get_by_email_login(email)
             if user and bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
                 print(user.profile)
-                tok = self.jwt_generate(user.email, user.uuid, 'asicuuibryayuoinrinqr3298470947yriueyruiqyeiruqmeiurynqewirye8qw764893481yimumyrqrq')
+                tok = self.jwt_generate(user.email, user.uuid, 'asicuuibryayuoinrinqr3298470947yriueyruiqmeiurynqewirye8qw764893481yimumyrqrq')
                 gen_jwt = Jwt_response(email=user.email, token=tok)
                 response = Base_response(data=gen_jwt, message='Success', code=200)
             else:
