@@ -10,7 +10,7 @@ connection = os.getenv('URR')
 user = os.getenv('USS')
 password = os.getenv('PSS')
 
-engine = create_engine(f'mysql+pymysql://{user}:{password}@{connection}:3306/users')
+engine = create_engine(f'mysql+pymysql://{user}:{password}@{connection}:3306/users', pool_size=10, max_overflow=20, pool_recycle=300)
 meta = MetaData()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
