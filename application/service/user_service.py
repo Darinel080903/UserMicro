@@ -53,7 +53,7 @@ class User_service(User_use_case, ABC):
     def get_by_email(self, user_email: str) -> Base_response:
         try:
             user = self.user_repository.get_by_email(user_email)
-            user = User_response(email=user.email, uuid=user.uuid, name=user.name, lastname=user.lastname, profile=user.profile, phone_number=user.phone_number, role=user.role)
+            user = User_response(email=user.email, uuid=user.uuid, name=user.name, lastname=user.lastname, profile=user.profile, phone_number=user.phone_number, rol=user.rol)
             response = Base_response(data=user, message='Success', code=200)
         except Exception as e:
             response = Base_response(data=None, message=str(e), code=500)
