@@ -3,6 +3,7 @@ from abc import ABC
 
 from domain.model.dto.response.base_response import Base_response
 from domain.model.dto.response.user_response import User_response
+from domain.model.dto.rol import Rol
 from domain.model.user_domain import User_domain
 from domain.repository.user_repository import User_repository
 from domain.use_case.user_use_case import User_use_case
@@ -52,7 +53,7 @@ class User_service(User_use_case, ABC):
     def get_by_email(self, user_email: str) -> Base_response:
         try:
             user = self.user_repository.get_by_email(user_email)
-            user = User_response(email=user.email, uuid=user.uuid, name=user.name, lastname=user.lastname, profile=user.profile, phone_number=user.phone_number)
+            user = User_response(email=user.email, uuid=user.uuid, name=user.name, lastname=user.lastname, profile=user.profile, phone_number=user.phone_number, role=user.role)
             response = Base_response(data=user, message='Success', code=200)
         except Exception as e:
             response = Base_response(data=None, message=str(e), code=500)
@@ -73,3 +74,11 @@ class User_service(User_use_case, ABC):
         except Exception as e:
             response = Base_response(data=None, message=str(e), code=500)
             return response.to_dict()
+
+    def update_role(self, user_id: str) -> Base_response:
+        try:
+            self.user_repository.update_role(user_id)
+            response = Base_response(data=None, message='Success', code=200)
+        except Exception as e:
+            response = Base_response(data=None, message=str(e), code=500)
+        return response.to_dict()

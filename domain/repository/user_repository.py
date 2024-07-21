@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 
 from domain.model.dto.response.user_response import User_response
+from domain.model.dto.rol import Rol
 from domain.model.user_domain import User_domain
 
 
@@ -36,4 +37,8 @@ class User_repository(ABC):
 
     @abstractmethod
     def get_by_email_login(self, email: str):
+        raise NotImplemented
+
+    @abstractmethod
+    def update_role(self, user_id: str):
         raise NotImplemented

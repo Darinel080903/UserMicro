@@ -2,6 +2,7 @@ from abc import ABC
 from typing import List
 
 from domain.model.dto.response.user_response import User_response
+from domain.model.dto.rol import Rol
 from domain.model.user_domain import User_domain
 from domain.repository.user_repository import User_repository
 from infraestructure.configuration.db import SessionLocal
@@ -63,3 +64,10 @@ class User_repository_impl(User_repository, ABC):
 
     def get_by_email_login(self, email: str):
         return self.db.query(Users).filter(Users.email == email).first()
+
+    def update_role(self, user_id: str):
+        user = self.db.query(Users).filter(Users.uuid == user_id).first()
+        user.rol = Rol.ADMIN
+        self.db.commit()
+        self.db.refresh(user)
+        self.db.close()

@@ -3,6 +3,7 @@ from typing import List
 
 from domain.model.dto.response.base_response import Base_response
 from domain.model.dto.response.user_response import User_response
+from domain.model.dto.rol import Rol
 from domain.model.user_domain import User_domain
 from domain.repository.user_repository import User_repository
 
@@ -34,4 +35,8 @@ class User_use_case(ABC):
 
     @abstractmethod
     def upload_image(self, content: bytes, filename: str, uuid: str) -> Base_response:
+        raise NotImplemented
+
+    @abstractmethod
+    def update_role(self, user_id: str) -> Base_response:
         raise NotImplemented

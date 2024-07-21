@@ -1,8 +1,10 @@
 from uuid import uuid4
 
+from domain.model.dto.rol import Rol
+
 
 class User_domain:
-    def __init__(self, name: str, lastname: str, phone_number: str, email: str, password: str):
+    def __init__(self, name: str, lastname: str, phone_number: str, email: str, password: str, rol: Rol):
         self.uuid = str(uuid4())
         self.name = name
         self.lastname = lastname
@@ -10,6 +12,7 @@ class User_domain:
         self.profile = ''
         self.email = email
         self.password = password
+        self.rol = rol
 
     def get_id(self):
         return self.uuid
@@ -46,3 +49,6 @@ class User_domain:
 
     def set_password(self, password):
         self.password = password
+
+    def set_role(self, role):
+        self.role = role

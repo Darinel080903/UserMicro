@@ -4,6 +4,7 @@ from fastapi.security import OAuth2PasswordBearer
 from application.service.auth_service import Auth_service
 from application.service.user_service import User_service
 from domain.model.dto.response.base_response import Base_response
+from domain.model.dto.rol import Rol
 from infraestructure.repository import user_repository_impl
 from infraestructure.mappers.user_mapper_service import UserMapperService
 from infraestructure.web.request.login_entity_request import Login_entity_request
@@ -59,6 +60,11 @@ def delete_user(user_id: str):
 def login_user(login: Login_entity_request):
     user = service_auth.login(login.email, login.password)
     return user
+
+
+@controller.put(default_route + "/upgrade/role/{user_id}")
+def update_role(user_id: str,):
+    return service.update_role(user_id)
 
 
 @controller.get(default_route + "/health")

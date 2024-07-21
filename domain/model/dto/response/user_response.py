@@ -1,11 +1,15 @@
+from domain.model.dto.rol import Rol
+
+
 class User_response:
-    def __init__(self, uuid: str, name: str, lastname: str, phone_number: str, profile: str, email: str):
+    def __init__(self, uuid: str, name: str, lastname: str, phone_number: str, profile: str, email: str, rol: Rol):
         self.uuid = uuid
         self.name = name
         self.phone_number = phone_number
         self.profile = profile
         self.lastname = lastname
         self.email = email
+        self.rol = rol
 
     def get_uuid(self):
         return self.uuid

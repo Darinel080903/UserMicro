@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 
+from domain.model.dto.rol import Rol
+
 
 class UpdateUser(BaseModel):
     name: str

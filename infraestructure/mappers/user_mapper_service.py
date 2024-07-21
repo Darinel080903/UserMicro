@@ -1,4 +1,5 @@
 from domain.model.dto.response.user_response import User_response
+from domain.model.dto.rol import Rol
 from domain.model.user_domain import User_domain
 from infraestructure.schema.models_factory import Users
 from infraestructure.web.request.user_entity_request import User_entity_request
@@ -25,6 +26,7 @@ class UserMapperService:
             profile=user.profile,
             lastname=user.lastname,
             email=user.email,
+            rol=user.rol
         )
 
     @staticmethod
@@ -35,7 +37,8 @@ class UserMapperService:
             lastname=user.lastname,
             phone_number=user.phone_number,
             email=user.email,
-            password=user.password
+            password=user.password,
+            rol=user.rol
         )
 
     @staticmethod
@@ -47,6 +50,7 @@ class UserMapperService:
             profile=user.profile,
             phone_number=user.phone_number,
             email=user.email,
+            rol=user.rol
         )
 
     @staticmethod
@@ -56,7 +60,8 @@ class UserMapperService:
             lastname=user.lastname,
             phone_number=user.phone_number,
             email=user.email,
-            password=user.password
+            password=user.password,
+            rol=Rol.USER
         )
 
     @staticmethod
@@ -66,5 +71,6 @@ class UserMapperService:
             lastname=user.lastname,
             phone_number=user.phone_number,
             email='',
-            password=''
+            password='',
+            rol=Rol.USER
         )
