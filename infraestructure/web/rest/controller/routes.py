@@ -62,7 +62,7 @@ def login_user(login: Login_entity_request):
     return user
 
 
-@controller.put(default_route + "/upgrade/role/{user_id}")
+@controller.put(default_route + "/upgrade/role/{user_id}", dependencies=[Depends(JWTBearer())])
 def update_role(user_id: str,):
     return service.update_role(user_id)
 
