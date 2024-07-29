@@ -66,7 +66,7 @@ class User_service(User_use_case, ABC):
             raise Exception('Invalid file type')
 
         try:
-            url = self.user_repository.post_image(content, filename, 'profileusersestablishment', filename)
+            url = self.user_repository.post_image(content, filename, 'profileusersestablishment2', filename)
             print("waos",url)
             self.user_repository.create_image_for_user(uuid, url)
             response = Base_response(data=None, message='Success', code=201)
